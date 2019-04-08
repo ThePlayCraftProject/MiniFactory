@@ -9,7 +9,7 @@ public class PlayerManager {
 	private Listener findingNewPlayers;
 	private boolean isFinding = false;
 	private ServerSocket server;
-	private int max = 2;
+	public final int max = 2;
 	
 	public PlayerManager() {
 		info("Запуск.");
@@ -48,7 +48,7 @@ public class PlayerManager {
 	}
 	
 	public Map<String, Player> getPlayers() {
-		return players;
+		return new HashMap<String, Player>(players);
 	}
 	
 	private void startFindingPlayers() {

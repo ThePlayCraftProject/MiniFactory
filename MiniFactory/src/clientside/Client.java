@@ -25,6 +25,9 @@ public class Client {
 			socket = new Socket(ip, 25565);
 		} catch (IOException e) {
 			e.printStackTrace();
+			if (client != null) {
+				client.askToStop();
+			}
 		}
 		client = new Listener(socket);
 		client.start();

@@ -4,6 +4,7 @@ public class Game {
 	private final static EnterpriseManager em = new EnterpriseManager();
 	private final static CommandManager cm = new CommandManager();
 	private final static PlayerManager pm = new PlayerManager();
+	private final static QuerryServer qs = new QuerryServer();
 	private static boolean playing = true;
 	
 	public static void main (String[] args) throws InterruptedException {
@@ -31,6 +32,7 @@ public class Game {
 	private static void stop() {
 		System.out.println("Стоп.");
 		pm.stop();
+		qs.stop();
 	}
 
 	public static EnterpriseManager getEnterpriseManager() {

@@ -2,6 +2,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Objects;
 
 public class Player {
 	private String name;
@@ -12,6 +13,30 @@ public class Player {
 		return name;
 	}
 	
+	
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(listener, name, socket);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		return Objects.equals(listener, other.listener) && Objects.equals(name, other.name)
+				&& Objects.equals(socket, other.socket);
+	}
+
+
+
 	public Player(String name, Socket socket) {
 		this.name = name;
 		this.socket = socket;
