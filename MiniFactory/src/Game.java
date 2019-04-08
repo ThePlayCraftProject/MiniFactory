@@ -13,7 +13,7 @@ public class Game {
 	}
 	
 	private static void start() {
-		System.out.println("Старт.");
+		System.out.println("РЎС‚Р°СЂС‚.");
 		Scanner in = new Scanner(System.in);
 		String msg = in.nextLine();
 		while (playing) {
@@ -30,7 +30,7 @@ public class Game {
 	}
 	
 	private static void stop() {
-		System.out.println("Стоп.");
+		System.out.println("РЎС‚РѕРї.");
 		pm.stop();
 		qs.stop();
 	}

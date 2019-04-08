@@ -75,7 +75,7 @@ public class Player {
 		try {
 			socket.close();
 			listener.askToStop();
-			System.out.println("ОООП!");
+			System.out.println("РћРћРћРџ!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -109,13 +109,13 @@ class ServerSideListener extends Thread {
 				
 				while (!client.isClosed() && !needToStop) {
 					String cmd = dis.readUTF();
-					System.out.println("Получил: "+cmd+" от "+p.getName());
+					System.out.println("РїРѕР»СѓС‡РёР»: "+cmd+" РѕС‚"+p.getName());
 					Game.getCommandManager().gotCommand(p, cmd);
 				}
 			} catch (IOException e) {
 				if (needToStop) break;
 				e.printStackTrace();
-				Game.getPlayerManager().info("С игроком "+p.getName()+" потерено соединение.. "+tries+" попытка.");
+				Game.getPlayerManager().info("РЎ РёРіСЂРѕРєРѕРј "+p.getName()+" РїРѕС‚РµСЂСЏРЅРѕ СЃРѕРµРґРёРЅРµРЅРёРµ.. "+tries+" РїРѕРїС‹С‚РєР°.");
 				tries++;
 				try {
 					Thread.sleep(1000);

@@ -5,7 +5,7 @@ public class EnterpriseManager {
 	private Map<String, Enterprise> enterprises = new HashMap<String, Enterprise>();
 	
 	public EnterpriseManager() {
-		info("Запуск.");
+		info("РЎС‚Р°СЂС‚.");
 	}
 	
 	public void add(String name, Enterprise enterprise) {

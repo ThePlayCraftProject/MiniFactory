@@ -19,7 +19,7 @@ public class Client {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
-			System.out.println("Введите ip адрес сервера:");
+			System.out.println("Р’РІРµРґРёС‚Рµ ip Р°РґСЂРµСЃ СЃРµСЂРІРµСЂР°:");
 			String ip = br.readLine();
 			if (ip.toLowerCase().equals("marvel")) ip = "178.140.215.233";
 			socket = new Socket(ip, 25565);
@@ -37,17 +37,17 @@ public class Client {
 			while(!socket.isClosed() && playing) {
 				String cmd = br.readLine();
 				if (cmd.toLowerCase().equals("/help")) {
-					System.out.println("Клиентские команды:");
-					System.out.println("/onlymenu - глушитель чата, при отключении отобразит пропущенные сообщения");
+					System.out.println("РљР»РёРµРЅС‚СЃРєРёРµ РєРѕРјР°РЅРґС‹:");
+					System.out.println("/onlymenu - РіР»СѓС€РёС‚РµР»СЊ С‡Р°С‚Р°, РїСЂРё РѕС‚РєР»СЋС‡РµРЅРёРё РѕС‚РѕР±СЂР°Р·РёС‚ РїСЂРѕРїСѓС‰РµРЅРЅС‹Рµ СЃРѕРѕР±С‰РµРЅРёСЏ");
                 }
 				if (cmd.toLowerCase().equals("/onlymenu")) {
 					if (client.isMenuMode()) {
 						client.MenuModeOff();
-						System.out.println("Чат заглушён. Если хотите разглушить, напишите ещё раз.");
+						System.out.println("Р§Р°С‚ Р·Р°РіР»СѓС€С‘РЅ. Р•СЃР»Рё С…РѕС‚РёС‚Рµ СЂР°Р·РіР»СѓС€РёС‚СЊ, РЅР°РїРёС€РёС‚Рµ РµС‰С‘ СЂР°Р·.");
 					}
 					else {
 						client.MenuModeOn();
-						System.out.println("Чат разглушён.");
+						System.out.println("Р§Р°С‚ СЂР°Р·РіР»СѓС€С‘РЅ.");
 					}
 				} else {
 					System.out.println(cmd);

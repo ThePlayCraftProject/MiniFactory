@@ -12,7 +12,7 @@ public class PlayerManager {
 	public final int max = 2;
 	
 	public PlayerManager() {
-		info("Запуск.");
+		info("Р—Р°РїСѓСЃРє.");
 		try {
 			server = new ServerSocket(25565);
 		} catch (IOException e) {
@@ -34,17 +34,17 @@ public class PlayerManager {
 	
 	public void stop() {
 		stopFindingPlayers();
-		broadcast("Сервер выключается!");
+		broadcast("РЎРµСЂРІРµСЂ РІС‹РєР»СЋС‡Р°РµС‚СЃСЏ!");
 		try {
 			server.close();
 			for (Player p : players.values()) {
 				p.stop();
 			}
-			System.out.println("ОООП!");
+			System.out.println("РћРћРџ!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		info("Стоп.");
+		info("РЎС‚РѕРї.");
 	}
 	
 	public Map<String, Player> getPlayers() {
@@ -83,8 +83,8 @@ public class PlayerManager {
 	public void disconnectPlayer(Player p) {
 		p.stop();
 		if (players.remove(p.getName()) != null) {
-			info("Игрок "+p.getName()+" отключился!");
-			broadcast("Игрок "+p.getName()+" отключился!");
+			info("РРіСЂРѕРє "+p.getName()+" РѕС‚РєР»СЋС‡РёР»СЃСЏ!");
+			broadcast("РРіСЂРѕРє  "+p.getName()+" РїРѕРєРёРЅСѓР» РЅР°СЃ!");
 		}
 		if (players.size() < max) startFindingPlayers();
 	}
@@ -120,21 +120,21 @@ class Listener extends Thread {
 	@Override
 	public void run() {
 		super.run();
-		info("Начат поиск игроков.");
+		info("РќР°С‡Р°С‚ РїРѕРёСЃРє РёРіСЂРѕРєРѕРІ.");
 		while (!needToStop && !server.isClosed()) {
 			try {
 				Socket client = server.accept();
 				if (client != null) {
 					Player p = new Player("UnnamedSocket"+(pm.getPlayers().size()+1), client);
 					pm.add(p);
-					info("Игрок "+p.getName()+" подключился!");
-					Game.getPlayerManager().broadcast("Игрок "+p.getName()+" подключился!");
-					info("Список игроков: "+pm.getKeysAsString());
+					info("РРіСЂРѕРє "+p.getName()+" РїРѕРґРєР»СЋС‡РёР»СЃСЏ!");
+					Game.getPlayerManager().broadcast("РРіСЂРѕРє "+p.getName()+" РїСЂРёСЃРѕРµРґРёРЅРёР»СЃСЏ!");
+					info("РЎРїРёСЃРѕРє РёРіСЂРѕРєРѕРІ: "+pm.getKeysAsString());
 				}
 			} catch (IOException e) {
 				if (!needToStop) e.printStackTrace();
 			}
 		}
-		info("Прекращён поиск игроков.");
+		info("РџСЂРµРєСЂР°С‰С‘РЅ РїРѕРёСЃРє РёРіСЂРѕРєРѕРІ.");
 	}
 }

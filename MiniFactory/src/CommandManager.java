@@ -1,6 +1,6 @@
 public class CommandManager {
 	public CommandManager() {
-		info("Запуск.");
+		info("РЎС‚Р°СЂС‚.");
 	}
 
 	protected void info(String s) {
@@ -28,10 +28,10 @@ public class CommandManager {
 	
 	private void refineCommand(Player p, String cmd, String[] args) {
 		if (cmd.equals("help")) {
-			p.sendMessage("Общие команды:");
-			p.sendMessage("/help - помощь");
-			p.sendMessage("Серверные команды:");
-			p.sendMessage("/changenick <ник> - смена ника");
+			p.sendMessage("РћР±С‰РёРµ РєРѕРјР°РЅРґС‹:");
+			p.sendMessage("/help - РїРѕРјРѕС‰СЊ");
+			p.sendMessage("РЎРµСЂРІРµСЂРЅС‹Рµ РєРѕРјР°РЅРґС‹:");
+			p.sendMessage("/changenick <РЅРёРє> - СЃРјРµРЅР° РЅРёРєР°");
 		}
 		else if (cmd.equals("changenick")) {
 			if (args.length >= 1) {
@@ -40,15 +40,15 @@ public class CommandManager {
 					nick+=" "+args[i];
 				}
 				if (Game.getPlayerManager().getPlayer(nick) != null) {
-					p.sendMessage("Игрок с именем "+nick+" уже существует.", "MENU");
+					p.sendMessage("РРіСЂРѕРє СЃ РёРјРµРЅРµРј "+nick+" СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚.", "MENU");
 					return;
 				}
-				p.sendMessage("Ваше старое имя "+p.getName()+" было сменено на "+nick+".", "MENU");
+				p.sendMessage("Р’Р°С€Рµ СЃС‚Р°СЂРѕРµ РёРјСЏ "+p.getName()+" Р±С‹Р»Рѕ СЃРјРµРЅРµРЅРѕ РЅР° "+nick+".", "MENU");
 				p.changeName(nick);
 			}
-			else p.sendMessage("Не указано новое имя.", "MENU");
+			else p.sendMessage("РќРµ СѓРєР°Р·Р°РЅРѕ РЅРѕРІРѕРµ РёРјСЏ.", "MENU");
 			return;
 		}
-		else p.sendMessage("Такой команды не существует. /help", "MENU");
+		else p.sendMessage("РўР°РєРѕР№ РєРѕРјР°РЅРґС‹ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚. /help", "MENU");
 	}
 }
