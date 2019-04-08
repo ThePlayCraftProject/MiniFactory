@@ -109,7 +109,7 @@ class ServerSideListener extends Thread {
 				
 				while (!client.isClosed() && !needToStop) {
 					String cmd = dis.readUTF();
-					System.out.println("получил: "+cmd+" от"+p.getName());
+					System.out.println("получил: "+cmd+" от "+p.getName());
 					Game.getCommandManager().gotCommand(p, cmd);
 				}
 			} catch (IOException e) {

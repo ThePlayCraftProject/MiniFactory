@@ -50,7 +50,6 @@ public class Client {
 						System.out.println("Чат разглушён.");
 					}
 				} else {
-					System.out.println(cmd);
 					dos.writeUTF(cmd);
 					if (!br.ready()) {
 						dos.flush();
