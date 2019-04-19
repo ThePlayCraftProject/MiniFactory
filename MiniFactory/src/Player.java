@@ -1,8 +1,10 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Player {
 	private String name;
@@ -59,9 +61,9 @@ public class Player {
 		
 		if (!socket.isClosed()) {
 			try {
-				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+				PrintStream dos = new PrintStream(socket.getOutputStream());
 				
-				dos.writeUTF(s);
+				dos.println(s);
 				dos.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -104,11 +106,11 @@ class ServerSideListener extends Thread {
 		
 		int tries = 1;
 		while (tries <= 3) {
-			try(DataInputStream dis = new DataInputStream(client.getInputStream())) {
+			try(Scanner dis = new Scanner(client.getInputStream())) {
 				
 				
 				while (!client.isClosed() && !needToStop) {
-					String cmd = dis.readUTF();
+					String cmd = dis.nextLine();
 					System.out.println("получил: "+cmd+" от "+p.getName());
 					Game.getCommandManager().gotCommand(p, cmd);
 				}
