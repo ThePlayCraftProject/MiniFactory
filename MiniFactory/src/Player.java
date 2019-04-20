@@ -3,6 +3,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -114,7 +115,7 @@ class ServerSideListener extends Thread {
 					System.out.println("получил: "+cmd+" от "+p.getName());
 					Game.getCommandManager().gotCommand(p, cmd);
 				}
-			} catch (IOException e) {
+			} catch (IOException | NoSuchElementException e) {
 				if (needToStop) break;
 				e.printStackTrace();
 				Game.getPlayerManager().info("С игроком "+p.getName()+" потеряно соединение.. "+tries+" попытка.");

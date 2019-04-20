@@ -1,13 +1,14 @@
 package clientside;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class Client {
 	private static Socket socket;
@@ -33,7 +34,7 @@ public class Client {
 		client.start();
 		
 
-		try(DataOutputStream dos = new DataOutputStream(socket.getOutputStream())) {
+		try(PrintStream dos = new PrintStream(socket.getOutputStream())) {
 			while(!socket.isClosed() && playing) {
 				String cmd = br.readLine();
 				if (cmd.toLowerCase().equals("/help")) {
@@ -50,7 +51,7 @@ public class Client {
 						System.out.println("Чат разглушён.");
 					}
 				} else {
-					dos.writeUTF(cmd);
+					dos.println(cmd);
 					if (!br.ready()) {
 						dos.flush();
 					}
@@ -62,13 +63,18 @@ public class Client {
 	}
 	
 	private void stop() {
-		client.askToStop();
-		playing = false;
-		try {
-			socket.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	    if (playing) {
+	        if (client != null) {
+	            client.askToStop();
+	            client.interrupt();
+	        }
+			playing = false;
+			try {
+				socket.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
 	}
 }
 
@@ -109,9 +115,9 @@ class Listener extends Thread {
 		super.run();
 
 		
-		try(DataInputStream dis = new DataInputStream(socket.getInputStream())) {
+		try(Scanner dis = new Scanner(socket.getInputStream())) {
 			while (!socket.isClosed() && !needToStop) {
-				String msg = dis.readUTF();
+				String msg = dis.nextLine();
 				if (msg.indexOf("$MENU$") == 0) {
 					msg = msg.replace("$MENU$", "");
 					System.out.println("<"+msg);
@@ -119,7 +125,7 @@ class Listener extends Thread {
 					needToShow.add(msg);
 				} else System.out.println("<"+msg);
 			}
-		} catch (IOException e) {
+		} catch (IOException | NoSuchElementException e) {
 			e.printStackTrace();
 		}
 	}
